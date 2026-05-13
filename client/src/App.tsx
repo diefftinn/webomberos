@@ -1,0 +1,61 @@
+import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import NotFound from "@/pages/NotFound";
+import { Route, Switch } from "wouter";
+import ErrorBoundary from "./components/ErrorBoundary";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import Home from "./pages/Home";
+import News from "./pages/News";
+import Services from "./pages/Services";
+import Stations from "./pages/Stations";
+import Courses from "./pages/Courses";
+import Gallery from "./pages/Gallery";
+import Info from "./pages/Info";
+import Contact from "./pages/Contact";
+import Volunteers from "./pages/Volunteers";
+import escudo from "@/assets/images/escudo.png";
+
+
+
+function Router() {
+  return (
+    <Switch>
+      <Route path={"/"} component={Home} />
+      <Route path={"/news"} component={News} />
+      <Route path={"/services"} component={Services} />
+      <Route path={"/stations"} component={Stations} />
+      <Route path={"/courses"} component={Courses} />
+      <Route path={"/gallery"} component={Gallery} />
+      <Route path={"/info"} component={Info} />
+      <Route path={"/contact"} component={Contact} />
+      <Route path={"/volunteers"} component={Volunteers} />
+      <Route path={"/404"} component={NotFound} />
+      {/* Final fallback route */}
+      <Route component={NotFound} />
+    </Switch>
+  );
+}
+
+function App() {
+  return (
+    <ErrorBoundary>
+      <ThemeProvider
+        defaultTheme="light">
+        <TooltipProvider>
+          <Toaster />
+
+{/* CONTENEDOR CON IMAGEN DE FONDO */}
+          <div
+            className="min-h-screen bg-cover bg-center bg-fixed"
+            style={{ backgroundImage: `url(${escudo})` }}
+          ><Router /></div>
+
+
+          
+        </TooltipProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
+  );
+}
+
+export default App;
